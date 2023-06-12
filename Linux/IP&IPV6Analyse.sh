@@ -13,7 +13,8 @@ sed -i 's/\/32//g' /opt/ping/ips.txt.temp
 sort /opt/ping/ips.txt.temp > /opt/ping/ips.txt
 sleep 1
 echo 'chcp 65001' > /opt/ping/ping.bat
-echo 'del D:\/Tools\/Ping\/ping.log' >> /opt/ping/ping.bat
+echo 'mkdir D:\Tools\Ping' >> /opt/ping/ping.bat
+echo 'del D:\Tools\Ping\ping.log' >> /opt/ping/ping.bat
 sed "s/^/ping -n 1 &/g" /opt/ping/ips.txt >> /opt/ping/ping.bat
 sed -i "s/$/& >> D:\/Tools\/Ping\/ping.log/g" /opt/ping/ping.bat
 echo 'chcp 65001' > /opt/ping/ping6.bat
