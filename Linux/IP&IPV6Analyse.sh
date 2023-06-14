@@ -10,4 +10,5 @@ awk -F ' ' '{print $2,$8 }' /opt/ping/ping6.csv.temp | sed -e "s/:443\/tcp//g;s/
 cat /opt/ping/ping6.csv | grep 'time=1' > /opt/ping/ping6_100ms.csv
 cat /opt/ping/ping6.csv | grep 'time=2' > /opt/ping/ping6_200ms.csv
 cat /opt/ping/ping6.csv | grep 'time=3' > /opt/ping/ping6_300ms.csv
+rm -f /opt/ping/ping.csv.temp /opt/ping/ping.csv.temp2 /opt/ping/ping6.csv.temp /opt/ping/ping6.csv.temp2
 exit
