@@ -7,7 +7,6 @@ NUM=$(cat /opt/ping/ping.csv | awk 'END{print NR}')
 for ((READNUM = 1 ; READNUM <= ${NUM} ; READNUM++)); do
   ip=$(awk '{print $1}' /opt/ping/ping.csv | head -n ${READNUM} | tail -n 1)
   curl --connect-timeout 10 --retry 10 "http://ip-api.com/csv/${ip}?lang=zh-CN" | awk -F, '{print $2}' >> /opt/ping/geo.dat
-  sleep 1
 done
 rm -f /opt/ping/ping.csv.temp /opt/ping/ping.csv.temp2
 
