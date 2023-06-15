@@ -3,14 +3,12 @@ rm -f /opt/ping/geo.dat
 cat /opt/ping/ping.log | grep 'Port is open' | grep -v 'statistics' > /opt/ping/ping.csv.temp
 awk -F ' ' '{print $2,$8 }' /opt/ping/ping.csv.temp | sed -e "s/:443\/tcp//g;s/time=//g;s/ms//g" > /opt/ping/ping.csv.temp2
 sort -n -k 2 /opt/ping/ping.csv.temp2 > /opt/ping/ping.csv
-#cat /opt/ping/ping.csv | grep 'time=1' > /opt/ping/ping_100ms.csv
-#cat /opt/ping/ping.csv | grep 'time=2' > /opt/ping/ping_200ms.csv
-#cat /opt/ping/ping.csv | grep 'time=3' > /opt/ping/ping_300ms.csv
 NUM=$(cat /opt/ping/ping.csv | awk 'END{print NR}')
 for READNUM in {1..${NUM}..1}
 do  
-ip=$(awk '{print $1}' /opt/ping/ping.csv | sed -n "${READNUM},${READNUM}p")
+ip=$(awk '{print $1}' /opt/ping/ping.csv | head -n ${READNUM} | tail -n 1)
 curl "http://ip-api.com/csv/${ip}?lang=zh-CN" | awk -F, '{print $2}' >> /opt/ping/geo.dat
+sleep 1
 done
 rm -f /opt/ping/ping.csv.temp /opt/ping/ping.csv.temp2
 
