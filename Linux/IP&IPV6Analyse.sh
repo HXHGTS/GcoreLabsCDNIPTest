@@ -7,12 +7,12 @@ sort -n -k 2 /opt/ping/ping.csv.temp2 > /opt/ping/ping.csv
 #cat /opt/ping/ping.csv | grep 'time=2' > /opt/ping/ping_200ms.csv
 #cat /opt/ping/ping.csv | grep 'time=3' > /opt/ping/ping_300ms.csv
 NUM=$(cat /opt/ping/ping.csv | awk 'END{print NR}')
-for READNUM in {1..${NUM}..1}  
+for READNUM in {1..${NUM}..1}
 do  
 ip=$(awk '{print $1}' /opt/ping/ping.csv | sed -n "${READNUM},${READNUM}p")
 curl "http://ip-api.com/csv/${ip}?lang=zh-CN" | awk -F, '{print $2}' >> /opt/ping/geo.dat
 done
-
+rm -f /opt/ping/ping.csv.temp /opt/ping/ping.csv.temp2
 
 
 #cat /opt/ping/ping6.log | grep 'Port is open' | grep -v 'statistics' > /opt/ping/ping6.csv.temp
