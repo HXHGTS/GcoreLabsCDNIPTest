@@ -11,7 +11,7 @@ for ((READNUM = 1 ; READNUM <= ${NUM} ; READNUM++)); do
   echo -e "\n" >> /opt/ping/geo.dat.temp
 done
 cat /opt/ping/geo.dat.temp | grep . > /opt/ping/geo.dat
-awk 'NR==FNR{a[$1]=$2}NR!=FNR{if($1 in a) print $1, a[$1], $2; else print $1, 0, $2}' ping.csv /opt/ping/geo.dat
+awk 'NR==FNR{a[$1]=$2}NR!=FNR{if($1 in a) print $1, a[$1], $2; else print $1, 0, $2}' /opt/ping/ping.csv /opt/ping/geo.dat > geoping.csv
 rm -f /opt/ping/ping.csv.temp /opt/ping/ping.csv.temp2 /opt/ping/geo.dat.temp
 
 
