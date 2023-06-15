@@ -6,10 +6,12 @@ sort -n -k 2 /opt/ping/ping.csv.temp2 > /opt/ping/ping.csv
 NUM=$(cat /opt/ping/ping.csv | awk 'END{print NR}')
 for ((READNUM = 1 ; READNUM <= ${NUM} ; READNUM++)); do
   ip=$(awk '{print $1}' /opt/ping/ping.csv | head -n ${READNUM} | tail -n 1)
-  echo -n "${ip} " >> /opt/ping/geo.dat
-  curl --connect-timeout 10 --retry 10 "http://ip-api.com/csv/${ip}?lang=zh-CN" | awk -F, '{print $2}' >> /opt/ping/geo.dat
+  echo -n "${ip} " >> /opt/ping/geo.dat.temp
+  curl --connect-timeout 10 --retry 10 "http://ip-api.com/csv/${ip}?lang=zh-CN" | awk -F, '{print $2}' >> /opt/ping/geo.dat.temp
+  echo -n "\n" >> /opt/ping/geo.dat.temp
 done
-rm -f /opt/ping/ping.csv.temp /opt/ping/ping.csv.temp2
+cat /opt/ping/geo.dat.temp | grep .
+rm -f /opt/ping/ping.csv.temp /opt/ping/ping.csv.temp2 /opt/ping/geo.dat.temp
 
 
 #cat /opt/ping/ping6.log | grep 'Port is open' | grep -v 'statistics' > /opt/ping/ping6.csv.temp
