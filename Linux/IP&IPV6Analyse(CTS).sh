@@ -10,6 +10,6 @@ cat source_ip.txt | nali > source_geo.txt
 
 gawk '{ print $2 }' source_geo.txt | sed -e "s/\[//g;s/\]//g" > geo.txt
 
-paste latency.txt geo.txt > latency+geo.txt
+paste latency.txt geo.txt | sed -e "s/\t/ /g" > latency+geo.txt
 
 exit
