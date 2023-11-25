@@ -1,5 +1,6 @@
 #!/bin/sh
 mkdir -p /opt/ping
+rm -f /opt/ping/*
 curl -sSL https://api.gcore.com/cdn/public-ip-list > /opt/ping/temp_ip.txt
 sed -i 's/", "/\n/g' /opt/ping/temp_ip.txt
 sed -i "s/\"\], \"addresses_v6\": \[\"/\n/g" /opt/ping/temp_ip.txt
