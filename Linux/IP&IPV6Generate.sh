@@ -13,5 +13,5 @@ cat /opt/ping/temp_ip.txt | grep '/32' > /opt/ping/ips_cst.txt
 sed -i 's/\/32//g' /opt/ping/ips_cst.txt
 sort /opt/ping/ips_cst.txt > /opt/ping/ips.txt
 sleep 1
-rm -f /opt/ping/temp_ip.txt
+rm -f /opt/ping/temp_ip.txt *_cst.txt
 exit
